@@ -81,6 +81,7 @@ int set_associative_nlp(long addr, long **cache, long **lru, int ways, int * lru
     int index = (addr / 32) % lines;
     
     int check = 0;
+    check = 0;
     int ret = 0;
     
     //check first line
@@ -142,8 +143,6 @@ int set_associative_missnlp(long addr, long **cache, long **lru, int ways, int *
     int lines = 512 / ways;
     int index = (addr / 32) % lines;
     
-    int check = 0;
-    
     //check first line
     for (int i = 0; i < ways; i++){
         if (cache[index][i] == 32 * (addr / 32)){
@@ -167,7 +166,6 @@ int set_associative_missnlp(long addr, long **cache, long **lru, int ways, int *
     cache[index][temp] = 32 * (addr / 32);
     
     //check line + 1
-    check = 0;
     int next_index = ((addr / 32) + 1) % lines;
     
     for (int i = 0; i < ways; i++){
